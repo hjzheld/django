@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>{{ todo.content }}</h1>
+        <p>{{ todo.created_at }}</p>
+        <p>{{ todo.updated_at }}</p>
+        <p>{{ todo.user.username }}</p>
+
+        {% if request.user == todo.user %}
+        <div>
+            <form action="/todo/delete/{{todo.id}}/" method="POST">
+                {% csrf_token %}
+                <button>삭제하기</button>
+            </form>
+            <a href="/todo/update/{{todo.id}}/">
+                <button>수정하기</button>
+            </a>
+        </div> 
+        {%endif%}   
+    <a href="/todo/">
+        <button>되돌아가기</button>
+    </a>
+    </div>
+</body>
+</html>
